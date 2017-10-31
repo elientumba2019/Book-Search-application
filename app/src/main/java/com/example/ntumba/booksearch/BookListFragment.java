@@ -1,5 +1,9 @@
 package com.example.ntumba.booksearch;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 
 /**
@@ -11,6 +15,23 @@ public class BookListFragment extends Fragment {
 
 
     public BookListFragment(){}
+
+
+    /**
+     * sets elements in screen
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.book_list_fragment_layout , container , false);
+        return view;
+    }
+
+
 
 
     /**
