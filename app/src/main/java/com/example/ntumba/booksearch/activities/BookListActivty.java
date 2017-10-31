@@ -1,6 +1,8 @@
-package com.example.ntumba.booksearch;
+package com.example.ntumba.booksearch.activities;
 
 import android.support.v4.app.Fragment;
+
+import com.example.ntumba.booksearch.fragments.BookListFragment;
 
 /**
  * Created by ntumba on 17-10-31.

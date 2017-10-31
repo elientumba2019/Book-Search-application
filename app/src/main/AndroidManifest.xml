@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".BookListActivty">
+        <activity android:name=".activities.BookListActivty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
