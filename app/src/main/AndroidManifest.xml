@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".SingleMainActivity">
+
+        <activity android:name=".BookListActivty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
