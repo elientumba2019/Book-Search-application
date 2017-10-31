@@ -15,6 +15,6 @@ public class BookListActivty extends SingleMainActivity {
      */
     @Override
     public Fragment makeFragment() {
-        return null;
+        return BookListFragment.getInstance();
     }
 }
