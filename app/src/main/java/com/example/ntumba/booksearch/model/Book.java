@@ -1,5 +1,7 @@
 package com.example.ntumba.booksearch.model;
 
+import android.text.TextUtils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -109,6 +111,24 @@ public class Book implements Serializable {
      */
     public static String getAuthor(JSONObject object){
 
+
+        try{
+
+            final JSONArray authors = object.getJSONArray("author_name");
+            int numberOfAuthors = authors.length();
+            final String[] authorStrings = new String[numberOfAuthors];
+
+            //adds the authors from the json object o the string array
+            for(int c = 0 ; c < authorStrings.length ; c++){
+                authorStrings[c] = authors.getString(c);
+            }
+
+            return TextUtils.join("," , authorStrings );
+
+        }catch (JSONException e){
+            e.printStackTrace();
+            return "";
+        }
     }
 
 
