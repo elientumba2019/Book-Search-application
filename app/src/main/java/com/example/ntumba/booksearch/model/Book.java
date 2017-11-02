@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by ntumba on 17-10-31.
@@ -129,6 +130,42 @@ public class Book implements Serializable {
             e.printStackTrace();
             return "";
         }
+    }
+
+
+
+
+    /**
+     * takes a json array and decodes them into business model
+     * by makes individual objects and adding them to an array List
+     * @param array
+     * @return
+     */
+    public static ArrayList<Book> fromJson(JSONArray array){
+
+        ArrayList<Book> books = new ArrayList<>(array.length());
+
+
+
+            for(int c = 0 ; c < array.length() ; c++){
+
+                JSONObject bookJson = null;
+
+                try{
+
+                    bookJson = array.getJSONObject(c);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    continue;
+                }
+
+                Book book = Book.fromJson(bookJson);
+                if(book != null){
+                    books.add(book);
+                }
+            }
+        return books;
     }
 
 
