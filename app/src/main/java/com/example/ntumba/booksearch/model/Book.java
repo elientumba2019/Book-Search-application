@@ -44,6 +44,7 @@ public class Book implements Serializable {
     }
 
 
+
     /**
      * return the large sized cover from the API
      * @return
@@ -52,4 +53,8 @@ public class Book implements Serializable {
         String url = "http://covers.openlibrary.org/b/olid/" + libraryId + "-L.jpg?default=false";
         return  url;
     }
+
+
+
+
 }
