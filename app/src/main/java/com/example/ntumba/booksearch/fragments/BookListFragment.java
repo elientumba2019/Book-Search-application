@@ -61,6 +61,7 @@ public class BookListFragment extends Fragment {
         fragment.bookList.setAdapter(adapter);
 
 
+        fetchBooks();
         return fragment.getRoot();
     }
 
@@ -89,8 +90,8 @@ public class BookListFragment extends Fragment {
                         list.clear();
                         //load books
 
-                        list.addAll(books);
-                        adapter.notifyDataSetChanged();
+                        refreshList(books);
+
                     }
                 }catch (JSONException exeption){
                     //show error
@@ -100,6 +101,19 @@ public class BookListFragment extends Fragment {
         });
     }
 
+
+
+
+    /**
+     * after adding the books in the list
+     * put them on screen
+     * @param books
+     */
+    private void refreshList(ArrayList<Book> books) {
+        list.addAll(books);
+        adapter = new BookAdapter(getActivity() , list);
+        fragment.bookList.setAdapter(adapter);
+    }
 
 
     /**
