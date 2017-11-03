@@ -11,8 +11,16 @@ import com.example.ntumba.booksearch.R;
 import com.example.ntumba.booksearch.databinding.BookListFragmentLayoutBinding;
 import com.example.ntumba.booksearch.listUtils.BookAdapter;
 import com.example.ntumba.booksearch.model.Book;
+import com.example.ntumba.booksearch.network.BookClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 
 /**
@@ -24,10 +32,15 @@ public class BookListFragment extends Fragment {
 
     private BookListFragmentLayoutBinding fragment;
     private BookAdapter adapter;
+    private BookClient client;
+    private ArrayList<Book> list = new ArrayList<>();
 
 
 
     public BookListFragment(){}
+
+
+
 
 
     /**
@@ -41,14 +54,51 @@ public class BookListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
+
         fragment = DataBindingUtil.inflate(inflater , R.layout.book_list_fragment_layout , container , false);
         fragment.bookList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new BookAdapter(getContext() , new ArrayList<Book>());
+        adapter = new BookAdapter(getContext() , list);
         fragment.bookList.setAdapter(adapter);
+
 
         return fragment.getRoot();
     }
 
+
+
+    /**
+     * retrieves the books from the Rest Api
+     */
+    private void fetchBooks(){
+
+        client = new BookClient();
+        client.getBooks("oscar Wilde" , new JsonHttpResponseHandler(){
+
+            @Override
+            public void onSuccess(int code , Header[] headers , JSONObject response){
+                try{
+
+                    JSONArray docs = null;
+
+                    if(response != null){
+                        //get docs from json array
+                        docs = response.getJSONArray("docs");
+                        //parse json array into array of model
+                        final ArrayList<Book> books = Book.fromJson(docs);
+                        //clear adapter
+                        list.clear();
+                        //load books
+
+                        list.addAll(books);
+                        adapter.notifyDataSetChanged();
+                    }
+                }catch (JSONException exeption){
+                    //show error
+                    exeption.printStackTrace();
+                }
+            }
+        });
+    }
 
 
 
