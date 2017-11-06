@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.ntumba.booksearch.R;
 import com.example.ntumba.booksearch.databinding.BookListFragmentLayoutBinding;
@@ -40,6 +41,7 @@ public class BookListFragment extends Fragment {
     private BookAdapter adapter;
     private BookClient client;
     private ArrayList<Book> list = new ArrayList<>();
+
 
 
 
@@ -73,6 +75,8 @@ public class BookListFragment extends Fragment {
         fragment.bookList.setAdapter(adapter);
 
 
+
+
         //fetchBooks();
         return fragment.getRoot();
     }
@@ -83,6 +87,11 @@ public class BookListFragment extends Fragment {
      * retrieves the books from the Rest Api
      */
     private void fetchBooks(String query){
+
+        //setting the progress bar visible before sending the online request
+        fragment.progress.setVisibility(ProgressBar.VISIBLE);
+
+
 
         client = new BookClient();
         client.getBooks(query , new JsonHttpResponseHandler(){
@@ -110,6 +119,9 @@ public class BookListFragment extends Fragment {
                     exeption.printStackTrace();
                 }
             }
+
+
+
         });
     }
 
