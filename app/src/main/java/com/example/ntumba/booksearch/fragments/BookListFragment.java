@@ -100,6 +100,9 @@ public class BookListFragment extends Fragment {
             public void onSuccess(int code , Header[] headers , JSONObject response){
                 try{
 
+                    //hide the progress bar
+                    fragment.progress.setVisibility(ProgressBar.GONE);
+
                     JSONArray docs = null;
 
                     if(response != null){
@@ -121,7 +124,18 @@ public class BookListFragment extends Fragment {
             }
 
 
-
+            /**
+             * actions to be performed if the request fails
+             * @param statusCode
+             * @param headers
+             * @param responseString
+             * @param throwable
+             */
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                //removing the bar from the screen if the request fails
+               fragment.progress.setVisibility(ProgressBar.GONE);
+            }
         });
     }
 
