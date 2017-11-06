@@ -3,10 +3,13 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -70,7 +73,7 @@ public class BookListFragment extends Fragment {
         fragment.bookList.setAdapter(adapter);
 
 
-        fetchBooks();
+        //fetchBooks();
         return fragment.getRoot();
     }
 
@@ -79,10 +82,10 @@ public class BookListFragment extends Fragment {
     /**
      * retrieves the books from the Rest Api
      */
-    private void fetchBooks(){
+    private void fetchBooks(String query){
 
         client = new BookClient();
-        client.getBooks("oscar Wilde" , new JsonHttpResponseHandler(){
+        client.getBooks(query , new JsonHttpResponseHandler(){
 
             @Override
             public void onSuccess(int code , Header[] headers , JSONObject response){
@@ -144,5 +147,30 @@ public class BookListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_book , menu);
+
+        final MenuItem searchitem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchitem);
+
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                fetchBooks(query);
+
+                searchView.clearFocus();
+                searchView.setQuery("" , false);
+                searchView.setIconified(true);
+                searchitem.collapseActionView();
+                getActivity().setTitle(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 }
