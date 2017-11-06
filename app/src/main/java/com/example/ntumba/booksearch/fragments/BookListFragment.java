@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -129,5 +131,18 @@ public class BookListFragment extends Fragment {
      */
     public static Fragment getInstance(){
         return new BookListFragment();
+    }
+
+
+
+
+    /**
+     * sets th emenu in screen
+     * @param menu
+     * @param inflater
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_book , menu);
     }
 }
