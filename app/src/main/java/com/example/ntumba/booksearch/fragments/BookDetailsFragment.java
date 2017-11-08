@@ -1,8 +1,15 @@
 package com.example.ntumba.booksearch.fragments;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.example.ntumba.booksearch.R;
+import com.example.ntumba.booksearch.databinding.BookDetailFragmentBinding;
 import com.example.ntumba.booksearch.model.Book;
 
 /**
@@ -16,6 +23,26 @@ public class BookDetailsFragment extends Fragment {
 
 
     public BookDetailsFragment(){}
+
+
+
+
+    /**
+     * creates the view for the fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        BookDetailFragmentBinding binding;
+        binding = DataBindingUtil.inflate(inflater , R.layout.book_detail_fragment , container , false);
+        return  binding.getRoot();
+    }
+
+
+
 
 
     /**
