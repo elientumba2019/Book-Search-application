@@ -1,8 +1,11 @@
 package com.example.ntumba.booksearch.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 import com.example.ntumba.booksearch.fragments.BookDetailsFragment;
+import com.example.ntumba.booksearch.model.Book;
 
 /**
  * Created by ntumba on 17-11-8.
@@ -10,6 +13,8 @@ import com.example.ntumba.booksearch.fragments.BookDetailsFragment;
 
 public class BookDetailsActivity extends SingleMainActivity {
 
+
+    private static final String INTENT_KEY = "key";
 
 
     /**
@@ -19,5 +24,20 @@ public class BookDetailsActivity extends SingleMainActivity {
     @Override
     public Fragment makeFragment() {
         return BookDetailsFragment.getFragmentinstance();
+    }
+
+
+
+    /**
+     * returns an intent to some activity which will
+     * launch this activity
+     * @param context
+     * @param book
+     * @return
+     */
+    public Intent getIntent(Context context , Book book){
+        Intent intent = new Intent(context , BookDetailsActivity.class);
+        intent.putExtra(INTENT_KEY , book);
+        return intent;
     }
 }
