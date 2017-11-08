@@ -54,5 +54,16 @@ public class BookClient {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     * gets extra details about the book
+     * @param openLibraryId
+     * @param handler
+     */
+    public void getExtraBookDetail(String openLibraryId , JsonHttpResponseHandler handler){
+        String url = getApiUrl("books/");
+        client.get(url + openLibraryId + ".json" , handler);
+    }
 }
 
