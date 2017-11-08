@@ -40,4 +40,14 @@ public class BookDetailsActivity extends SingleMainActivity {
         intent.putExtra(INTENT_KEY , book);
         return intent;
     }
+
+
+    /**
+     * different signature
+     * @param context
+     * @return
+     */
+    public Intent getIntent(Context context){
+        return new Intent(context , BookDetailsActivity.class);
+    }
 }
