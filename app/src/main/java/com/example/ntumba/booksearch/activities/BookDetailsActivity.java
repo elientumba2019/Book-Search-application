@@ -23,7 +23,9 @@ public class BookDetailsActivity extends SingleMainActivity {
      */
     @Override
     public Fragment makeFragment() {
-        return BookDetailsFragment.getFragmentinstance();
+        Intent intent = getIntent();
+        Book book = (Book) intent.getSerializableExtra(INTENT_KEY);
+        return BookDetailsFragment.getFragmentinstance(book);
     }
 
 
