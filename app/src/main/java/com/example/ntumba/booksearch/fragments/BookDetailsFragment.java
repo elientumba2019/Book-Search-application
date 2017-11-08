@@ -7,4 +7,16 @@ import android.support.v4.app.Fragment;
  */
 
 public class BookDetailsFragment extends Fragment {
+
+
+    public BookDetailsFragment(){}
+
+
+    /**
+     * returns an instance of the fragment
+     * @return
+     */
+    public static BookDetailsFragment getFragmentinstance(){
+        return new BookDetailsFragment();
+    }
 }

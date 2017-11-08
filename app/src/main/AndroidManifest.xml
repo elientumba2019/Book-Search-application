@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
 
 
+        <!-- book list activity -->
         <activity android:name=".activities.BookListActivty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +20,10 @@
             </intent-filter>
         </activity>
 
+
+
+        <!-- book detail activity -->
+        <activity android:name=".activities.BookDetailsActivity" />
 
 
     </application>
