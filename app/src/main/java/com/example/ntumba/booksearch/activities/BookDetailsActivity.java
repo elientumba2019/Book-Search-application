@@ -35,7 +35,7 @@ public class BookDetailsActivity extends SingleMainActivity {
      * @param book
      * @return
      */
-    public Intent getIntent(Context context , Book book){
+    public static Intent getIntent(Context context , Book book){
         Intent intent = new Intent(context , BookDetailsActivity.class);
         intent.putExtra(INTENT_KEY , book);
         return intent;
@@ -47,7 +47,7 @@ public class BookDetailsActivity extends SingleMainActivity {
      * @param context
      * @return
      */
-    public Intent getIntent(Context context){
+    public static Intent getIntent(Context context){
         return new Intent(context , BookDetailsActivity.class);
     }
 }
