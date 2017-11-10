@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ntumba.booksearch.R;
@@ -37,6 +38,7 @@ public class BookDetailsFragment extends Fragment {
     private static final String ARGUMENT_KEY = "key";
     private Book book;
     private BookClient client;
+    BookDetailFragmentBinding binding;
 
 
     public BookDetailsFragment(){}
@@ -61,7 +63,7 @@ public class BookDetailsFragment extends Fragment {
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        BookDetailFragmentBinding binding;
+
         binding = DataBindingUtil.inflate(inflater , R.layout.book_detail_fragment , container , false);
 
         if(book == null){
@@ -162,14 +164,27 @@ public class BookDetailsFragment extends Fragment {
         switch (item.getItemId()){
             case R.id.share :
                 setShareIntent();
-                break;
+                return true;
+
+            default :
+                return onContextItemSelected(item);
         }
+
+
     }
 
 
 
 
     private void setShareIntent(){
+
+        Uri bmpUri = getLocalBitmapUri(binding.ivBookCover);
+
+    }
+
+
+
+    private Uri getLocalBitmapUri(ImageView view){
 
     }
 }
