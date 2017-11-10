@@ -1,5 +1,6 @@
 package com.example.ntumba.booksearch.fragments;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -188,6 +189,17 @@ public class BookDetailsFragment extends Fragment {
     private void setShareIntent(){
 
         Uri bmpUri = getLocalBitmapUri(binding.ivBookCover);
+
+        Intent shareIntent = new Intent();
+
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.setType("*/*");
+        shareIntent.putExtra(Intent.EXTRA_TEXT , (String)binding.tvTitle.getText());
+        shareIntent.putExtra(Intent.EXTRA_STREAM , bmpUri);
+
+
+        Intent share = Intent.createChooser(shareIntent , "share image");
+        startActivity(share);
 
     }
 
