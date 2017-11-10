@@ -158,6 +158,18 @@ public class BookDetailsFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()){
+            case R.id.share :
+                setShareIntent();
+                break;
+        }
+    }
+
+
+
+
+    private void setShareIntent(){
+
     }
 }
