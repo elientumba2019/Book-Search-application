@@ -1,8 +1,12 @@
 package com.example.ntumba.booksearch.fragments;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -25,6 +29,10 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -174,8 +182,9 @@ public class BookDetailsFragment extends Fragment {
     }
 
 
-
-
+    /**
+     * launches the share intent
+     */
     private void setShareIntent(){
 
         Uri bmpUri = getLocalBitmapUri(binding.ivBookCover);
@@ -184,7 +193,41 @@ public class BookDetailsFragment extends Fragment {
 
 
 
+    /**
+     * return the Uri of the image view passed as argument
+     * @param view
+     * @return
+     */
     private Uri getLocalBitmapUri(ImageView view){
 
+        Drawable drawable = view.getDrawable();
+        Bitmap bmp = null;
+
+        if(drawable instanceof BitmapDrawable){
+            bmp = ((BitmapDrawable) view.getDrawable()).getBitmap();
+        }
+        else{
+            return null;
+        }
+
+        Uri bmpUri = null;
+
+
+        //store the image to external storage
+        try {
+            File file = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image" + System.currentTimeMillis() + ".png");
+            file.getParentFile().mkdir();
+
+            FileOutputStream out = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG , 90 , out);
+            out.close();
+
+            bmpUri = Uri.fromFile(file);
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return bmpUri;
     }
 }
